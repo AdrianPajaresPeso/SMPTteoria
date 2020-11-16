@@ -1,6 +1,5 @@
 package org.jesuitasrioja.SMPTteoria.logica;
 
-import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,16 +20,17 @@ public class GeneradorAmigoInvisible {
 	           listaParticipantes.remove(position);
 	       }
 
+		
 		for (String string : listaOrdenadaRandom) {
-			if(listaOrdenadaRandom.indexOf(string) == 0) {
-				mapaReturn.put(string, listaOrdenadaRandom.get(1));
-			}
+			int position = listaOrdenadaRandom.indexOf(string)+1;
 			
-			if(listaOrdenadaRandom.indexOf(string) == (listaOrdenadaRandom.size()-1)) {
-				mapaReturn.put(string, listaOrdenadaRandom.get(0)); 
+			
+			if(position >= listaOrdenadaRandom.size()){
+				position = 0;
 			}
-			int next = listaOrdenadaRandom.indexOf(string)+1;
-			mapaReturn.put(string, listaOrdenadaRandom.get(next));
+			mapaReturn.put(string, listaOrdenadaRandom.get(position));
+//			System.out.println(string +" "+ listaOrdenadaRandom.get(position));
+//			System.out.println(position);
 		}
 		
 		return mapaReturn;
