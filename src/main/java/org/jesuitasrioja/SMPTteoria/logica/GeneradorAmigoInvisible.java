@@ -1,38 +1,26 @@
 package org.jesuitasrioja.SMPTteoria.logica;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
+import org.jesuitasrioja.SMPTteoria.modelo.Participante;
 
 public class GeneradorAmigoInvisible {
 
-	public Map<String, String> generarAmigoInvisible(List<String> listaParticipantes){
-		Map<String, String> mapaReturn = new HashMap();
-		Random generator = new Random ();
-		ArrayList<String> listaOrdenadaRandom = new ArrayList<>();
-		
-		while (listaParticipantes.size() > 0)
-	       {
-	           int position = generator.nextInt(listaParticipantes.size());
-	           listaOrdenadaRandom.add(listaParticipantes.get(position));
-	           listaParticipantes.remove(position);
-	       }
+	public Map<Participante, Participante> generarAmigoInvisible(List<Participante> listaParticipantes) {
+		Map<Participante, Participante> mapaReturn = new HashMap();
 
-		
-		for (String string : listaOrdenadaRandom) {
-			int position = listaOrdenadaRandom.indexOf(string)+1;
-			
-			
-			if(position >= listaOrdenadaRandom.size()){
-				position = 0;
-			}
-			mapaReturn.put(string, listaOrdenadaRandom.get(position));
-//			System.out.println(string +" "+ listaOrdenadaRandom.get(position));
-//			System.out.println(position);
+		Collections.shuffle(listaParticipantes);
+		for (Participante participante : listaParticipantes) {
+			int position = listaParticipantes.indexOf(participante) + 1;// obtiene la posicion del siguiente
+			if (position >= listaParticipantes.size())
+				position = 0;// si la posicion es mayor o igual al tamaño de la lista
+			mapaReturn.put(participante, listaParticipantes.get(position));
 		}
-		
+
 		return mapaReturn;
 	}
+
 }
